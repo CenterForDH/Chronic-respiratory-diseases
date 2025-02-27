@@ -1,17 +1,4 @@
 #GBD : CRD_Covid19
-
-# Library
-#install.packages("tidyverse", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("patchwork", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("data.table", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("dplyr", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("scales", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("ggplot2", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("rworldmap")
-#install.packages("countrycode")
-#install.packages("RColorBrewer", lib = "C:/Users/user/Desktop/YesolYim/3. GBD/packages")
-#install.packages("rworldxtra")
-
 library(tidyverse) 
 library(patchwork) 
 library(data.table)
@@ -25,7 +12,7 @@ library(RColorBrewer)
 
 #load custom function
 ##don't change!
-source("D:/YesolYim/3. GBD/gbd_functions - GBD 2021.R")
+source("gbd_functions - GBD 2021.R")
 
 #Text
 theme(text = element_text(family = "sans"))
@@ -41,10 +28,10 @@ columns <- c("measure_id", "measure_name", "location_id", "location_name", "sex_
              "val", "upper", "lower")
 
 #dir: directory of data. All data must be located in the directory, and no other file should be in the directory. 
-dir <- "C:/Users/user/Desktop/YesolYim/3. GBD/data/"
+dir <- "data/"
 
 #diroutput: directory of the combined dataset. 
-diroutput <- "D:/GBD_result"
+diroutput <- "GBD_result"
 
 #projectName: id of the project
 projectName <- "CRD"
@@ -90,7 +77,7 @@ fwrite(df,paste0(diroutput,projectName,"_data.csv"))
 
 ########################################################################################
 ## 1.2. Load data
-df <- fread("D:/GBD_CRD_data.csv") 
+df <- fread("GBD_CRD_data.csv") 
 
 data_summary(SDI)
 ########################################################################################
@@ -130,7 +117,7 @@ missing_iso3_df <- datf1 %>%
   select(location_name)
 
 # Confirming the country that will be included in the final table
-lolo_df <- fread("C:/Users/user/Desktop/YesolYim/3. GBD/lolo.csv", header=TRUE, fill=TRUE)
+lolo_df <- fread("lolo.csv", header=TRUE, fill=TRUE)
 
 # Use semi_join to find values that overlap with the countries that go into the final table
 common_values <- semi_join(missing_iso3_df, lolo_df, by = c("location_name" = "Location"))
